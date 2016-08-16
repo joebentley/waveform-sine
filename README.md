@@ -6,7 +6,9 @@ View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) 
 
 ## TODO
 
-* Render a sine wave in two.js
+* ~~Render a sine wave in two.js~~
+
+* Add controls to change frequency and amplitude
 
 * Change the sine wave in time using an animation
 
