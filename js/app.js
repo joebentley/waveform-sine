@@ -3,14 +3,14 @@
 /* Run app when all MathJax has loaded. */
 MathJax.Hub.Queue(function () {
   // Unhide diagram
-  $('#hiddenMathJax').css('visibility', '')
+  $('#hidden').css('visibility', '')
 
   // Get diagram container and run app
   var elem = $('#diagramContainer')[0]
   var freqSlider = $('#frequencyInput')
   var ampSlider = $('#amplitudeInput')
-  var freqOutput = $('#frequencyOutput')
-  var ampOutput = $('#amplitudeOutput')
+  var freqOutput = $('#frequencyOutput .mjx-mn > .mjx-char')
+  var ampOutput = $('#amplitudeOutput .mjx-mn > .mjx-char')
 
   // Set default values for outputs
   $(freqOutput).text(Number($(freqSlider).val()).toFixed(1))

@@ -18,6 +18,18 @@ a:hover {
   color: #ff0000
 }
 
+.center {
+  text-align: center;
+}
+
+#controls {
+  margin-top: 2em;
+}
+
+#amplitude {
+  margin-left: 3em;
+}
+
 #diagramContainer {
   width: 500px;
   margin: 4em auto 0;
@@ -25,7 +37,7 @@ a:hover {
 }
 
 /* Tables */
-.divTable {
+/*.divTable {
 	display: table;
 }
 
@@ -40,4 +52,4 @@ a:hover {
 
 .divTableBody {
 	display: table-row-group;
-}
+}*/
