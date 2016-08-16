@@ -10,6 +10,10 @@ View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) 
 
 * ~~Add controls to change frequency and amplitude~~
 
+* ~~Draw subtick marks~~
+
+* Draw labels on the grid
+
 * Change the sine wave in time using an animation
 
   * Play and pause buttons

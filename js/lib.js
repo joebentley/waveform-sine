@@ -13,11 +13,13 @@ var lib = {}
   /* @param{rect} rectangle { x, y, width, height } bounding the grid.
    * @params{options} object of the form:
    * var options = {
-   *   numTicks,    // number of ticks on each axis. Defaults to 10.
-   *   tickSpacing, // { x, y } spacing of ticks in the x, y direction. Defaults
-   *                // to { x: rect.width / numTicks, y: rect.height / numTicks }
-   *   tickLength,  // length in pixels of the tickmark rendered on the grid. Defaults to 10.
-   *   gridlines    // true if you want dashed gridlines on each tick, defaults to true
+   *   numTicks,      // number of ticks on each axis. Defaults to 10.
+   *   tickSpacing,   // { x, y } spacing of ticks in the x, y direction. Defaults
+   *                  // to { x: rect.width / numTicks, y: rect.height / numTicks }
+   *   tickLength,    // length in pixels of the tickmark rendered on the grid. Defaults to 10.
+   *   numSubTicks,   // number of subticks per tick, set to 0 to not render. Defaults to 10.
+   *   subTickLength, // length in pixels of sub tickmark. Defaults to 6.
+   *   gridlines      // true if you want gridlines on each tick, defaults to true
    * }
    */
   ns.Grid = function (rect, options) {
@@ -29,6 +31,8 @@ var lib = {}
     this.numTicks = options.numTicks
     this.tickSpacing = options.tickSpacing
     this.tickLength = options.tickLength
+    this.numSubTicks = options.numSubTicks
+    this.subTickLength = options.subTickLength
     this.gridlines = options.gridlines
     this.center = { x: (this.rect.width / 2) + this.rect.x,
                     y: (this.rect.height / 2) + this.rect.y }
@@ -42,8 +46,19 @@ var lib = {}
     if (this.tickLength === undefined) {
       this.tickLength = 10
     }
+    if (this.numSubTicks === undefined) {
+      this.numSubTicks = 10
+    }
+    if (this.subTickLength === undefined) {
+      this.subTickLength = 6
+    }
     if (this.gridlines === undefined) {
       this.gridlines = true
+    }
+
+    this.subTickSpacing = {
+      x: this.tickSpacing.x / this.numSubTicks,
+      y: this.tickSpacing.y / this.numSubTicks
     }
   }
 
@@ -52,8 +67,10 @@ var lib = {}
     var gridX
     var gridY
     var gridlineColor = '#ddd'
+    var numXLines = this.rect.width / this.tickSpacing.x
+    var numYLines = this.rect.height / this.tickSpacing.y
 
-    for (var x = 0; x <= this.rect.width / this.tickSpacing.x; x++) {
+    for (var x = 0; x <= numXLines; x++) {
       // Draw horizontal gridlines
       if (this.gridlines) {
         gridX = two.makeLine(x * this.tickSpacing.x + this.rect.x, this.rect.y,
@@ -66,9 +83,21 @@ var lib = {}
       // Draw horizontal tickmarks
       two.makeLine(x * this.tickSpacing.x + this.rect.x, this.center.y - this.tickLength / 2,
         x * this.tickSpacing.x + this.rect.x, this.center.y + this.tickLength / 2)
+
+      // Draw horizontal sub tickmarks, and don't draw the last set of subticks
+      if (this.numSubTicks > 0 && x !== numXLines) {
+        for (var i = 0; i < this.numSubTicks; i++) {
+          two.makeLine(
+            x * this.tickSpacing.x + i * this.subTickSpacing.x + this.rect.x,
+            this.center.y - this.subTickLength / 2,
+            x * this.tickSpacing.x + i * this.subTickSpacing.x + this.rect.x,
+            this.center.y + this.subTickLength / 2
+          ).linewidth = 0.5
+        }
+      }
     }
 
-    for (var y = 0; y <= this.rect.height / this.tickSpacing.y; y++) {
+    for (var y = 0; y <= numYLines; y++) {
       // Draw vertical gridlines
       if (this.gridlines) {
         gridY = two.makeLine(this.rect.x, y * this.tickSpacing.y + this.rect.y,
@@ -81,6 +110,18 @@ var lib = {}
       // Draw vertical tickmarks
       two.makeLine(this.center.x - this.tickLength / 2, y * this.tickSpacing.y + this.rect.y,
         this.center.x + this.tickLength / 2, y * this.tickSpacing.y + this.rect.y)
+
+      // Draw vertical sub tickmarks, and don't draw the last set of subticks
+      if (this.numSubTicks > 0 && y !== numYLines) {
+        for (i = 0; i < this.numSubTicks; i++) {
+          two.makeLine(
+            this.center.x - this.subTickLength / 2,
+            y * this.tickSpacing.y + i * this.subTickSpacing.y + this.rect.y,
+            this.center.x + this.subTickLength / 2,
+            y * this.tickSpacing.y + i * this.subTickSpacing.y + this.rect.y
+          ).linewidth = 0.5
+        }
+      }
     }
 
     // Finally, draw the vertical and horizontal axes
@@ -138,8 +179,11 @@ var lib = {}
     var two = new Two({ width: 500, height: 500 }).appendTo(canvasContainer)
 
     var edgeOffset = 10
-    var grid = new ns.Grid({ x: edgeOffset, y: edgeOffset,
-      width: two.width - 2 * edgeOffset, height: two.height - 2 * edgeOffset })
+    var grid = new ns.Grid({
+      x: edgeOffset, y: edgeOffset,
+      width: two.width - 2 * edgeOffset, height: two.height - 2 * edgeOffset
+    }, {
+    })
 
     var amplitude = 5
     var frequency = 0.1
