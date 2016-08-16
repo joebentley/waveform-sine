@@ -7,5 +7,14 @@ MathJax.Hub.Queue(function () {
 
   // Get diagram container and run app
   var elem = $('#diagramContainer')[0]
-  lib.runApp(elem)
+  var freqSlider = $('#frequencyInput')
+  var ampSlider = $('#amplitudeInput')
+  var freqOutput = $('#frequencyOutput')
+  var ampOutput = $('#amplitudeOutput')
+
+  // Set default values for outputs
+  $(freqOutput).text(Number($(freqSlider).val()).toFixed(1))
+  $(ampOutput).text(Number($(ampSlider).val()).toFixed(1))
+
+  lib.runApp(elem, freqSlider, ampSlider, freqOutput, ampOutput)
 })

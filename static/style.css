@@ -23,3 +23,21 @@ a:hover {
   margin: 4em auto 0;
   position: relative;
 }
+
+/* Tables */
+.divTable {
+	display: table;
+}
+
+.divTableRow {
+	display: table-row;
+}
+
+.divTableCell {
+	display: table-cell;
+	padding: 3px 10px;
+}
+
+.divTableBody {
+	display: table-row-group;
+}

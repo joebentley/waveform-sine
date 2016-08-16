@@ -1,4 +1,4 @@
-/* globals Two */
+/* globals Two $ */
 
 var lib = {}
 
@@ -134,17 +134,45 @@ var lib = {}
     two.add(path)
   }
 
-  ns.runApp = function (canvasContainer) {
+  ns.runApp = function (canvasContainer, freqSlider, ampSlider, freqOutput, ampOutput) {
     var two = new Two({ width: 500, height: 500 }).appendTo(canvasContainer)
 
     var edgeOffset = 10
     var grid = new ns.Grid({ x: edgeOffset, y: edgeOffset,
       width: two.width - 2 * edgeOffset, height: two.height - 2 * edgeOffset })
 
-    grid.draw(two)
+    var amplitude = 5
+    var frequency = 0.1
 
-    ns.drawSine(two, grid, 5, 1)
+    function redraw () {
+      two.clear()
+      grid.draw(two)
+      ns.drawSine(two, grid, amplitude, frequency)
+      two.update()
+    }
 
-    two.update()
+    if (freqSlider !== undefined) {
+      $(freqSlider).on('input', function () {
+        frequency = Number(this.value)
+        redraw()
+
+        if (freqOutput !== undefined) {
+          $(freqOutput).text(frequency.toFixed(1))
+        }
+      })
+    }
+
+    if (ampSlider !== undefined) {
+      $(ampSlider).on('input', function () {
+        amplitude = Number(this.value)
+        redraw()
+
+        if (ampOutput !== undefined) {
+          $(ampOutput).text(amplitude.toFixed(1))
+        }
+      })
+    }
+
+    redraw()
   }
 })(lib)
