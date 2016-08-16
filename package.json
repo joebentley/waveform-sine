@@ -1,0 +1,27 @@
+{
+  "name": "waveform-sine",
+  "version": "0.0.1",
+  "description": "Visualisation of sinusoidal waveform changing in time",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "node_modules/.bin/eslint --fix . || true",
+    "lint": "node_modules/.bin/eslint . || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joebentley/waveform-sine.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joebentley/waveform-sine/issues"
+  },
+  "homepage": "https://github.com/joebentley/waveform-sine#readme",
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0"
+  }
+}

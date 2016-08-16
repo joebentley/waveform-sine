@@ -1,0 +1,21 @@
+{
+  "name": "waveform-sine",
+  "description": "Visualisation of sinusoidal waveform changing in time",
+  "main": "index.js",
+  "authors": [
+    "Joe Bentley <joebentley10@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/joebentley/waveform-sine",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "two.js": "^0.6.0"
+  }
+}
