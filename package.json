@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fix": "node_modules/.bin/eslint --fix . || true",
-    "lint": "node_modules/.bin/eslint . || true"
+    "lint": "node_modules/.bin/eslint . || true",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
   }
 }
