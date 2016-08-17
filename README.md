@@ -19,6 +19,6 @@ View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) 
   * Play and pause buttons
 
 
-* Show equation on page in LaTeX
+* ~~Show equation on page in LaTeX~~
 
-* Make frequency and amplitude inputs use LaTeX
+* ~~Make frequency and amplitude inputs use LaTeX~~
