@@ -183,6 +183,7 @@ var lib = {}
       x: edgeOffset, y: edgeOffset,
       width: two.width - 2 * edgeOffset, height: two.height - 2 * edgeOffset
     }, {
+      numSubTicks: 4
     })
 
     var amplitude = 5
