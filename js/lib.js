@@ -158,7 +158,7 @@ var lib = {}
     return scaled
   }
 
-  ns.drawSine = function (two, grid, amplitude, frequency, phase) {
+  ns.drawSine = function (two, grid, amplitude, frequency, phase, colour) {
     var numPoints = 1000
     var vertices = []
     var scaledVertices = []
@@ -183,11 +183,14 @@ var lib = {}
 
     var path = new Two.Path(scaledVertices, false, true)
     path.fill = 'transparent'
+    path.stroke = colour
 
     two.add(path)
   }
 
-  ns.runApp = function (canvasContainer, phaseSlider, freqSlider, ampSlider, phaseOutput, freqOutput, ampOutput) {
+  ns.runApp = function (canvasContainer, phaseSlider, freqSlider, ampSlider,
+                        phaseOutput, freqOutput, ampOutput, timeDelayOutput) {
+
     var two = new Two({ width: 500, height: 500 }).appendTo(canvasContainer)
 
     var edgeOffset = 10
@@ -200,12 +203,13 @@ var lib = {}
 
     var amplitude = 5
     var frequency = 0.1
-    var phase = 0
+    var phase = 0 // In units of per radian
 
     function redraw () {
       two.clear()
       grid.draw(two)
-      ns.drawSine(two, grid, amplitude, frequency, phase)
+      ns.drawSine(two, grid, amplitude, frequency, 0, 'red')
+      ns.drawSine(two, grid, amplitude, frequency, phase, 'blue')
       two.update()
     }
 
@@ -215,7 +219,12 @@ var lib = {}
         redraw()
 
         if (phaseOutput !== undefined) {
-          $(phaseOutput).text(phase.toFixed(1))
+          $(phaseOutput).text(phase.toFixed(2))
+
+          // Update time delay output
+          if (timeDelayOutput !== undefined) {
+            $(timeDelayOutput).text((phase / (2 * frequency)).toFixed(3))
+          }
         }
       })
     }
@@ -227,6 +236,11 @@ var lib = {}
 
         if (freqOutput !== undefined) {
           $(freqOutput).text(frequency.toFixed(1))
+
+          // Update time delay output
+          if (timeDelayOutput !== undefined) {
+            $(timeDelayOutput).text((phase / (2 * frequency)).toFixed(3))
+          }
         }
       })
     }

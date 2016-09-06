@@ -22,9 +22,9 @@ View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) 
 
 * ~~Allow change of phase angle~~
 
-  * Display phase angle along with time delay (phase angle / (2 * pi * freq))
+  * ~~Display phase angle along with time delay (phase angle / (2 * pi * freq))~~
 
-  * Show both unshifted and shifted waveforms
+  * ~~Show both unshifted and shifted waveforms~~
 
 
 * ~~Show equation on page in LaTeX~~
