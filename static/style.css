@@ -1,5 +1,5 @@
 body {
-  margin: 5em auto;
+  margin: 3em auto;
   max-width: 50em;
 
   font-family: "Helvetica", "Arial", sans-serif;
@@ -15,7 +15,15 @@ a {
 }
 
 a:hover {
-  color: #ff0000
+  color: #ff0000;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
 }
 
 .center {
