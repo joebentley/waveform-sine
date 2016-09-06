@@ -84,6 +84,18 @@ var lib = {}
       two.makeLine(x * this.tickSpacing.x + this.rect.x, this.center.y - this.tickLength / 2,
         x * this.tickSpacing.x + this.rect.x, this.center.y + this.tickLength / 2)
 
+      // Draw time markers
+      var xOffset = 0
+
+      if (x === numXLines / 2) {
+        xOffset = 10
+      }
+
+      two.scene.add(new Two.Text(x - numXLines / 2,
+        x * this.tickSpacing.x + this.rect.x + xOffset,
+        this.center.y + this.tickLength / 2 + 10,
+        { 'family': 'serif', 'size': '16' }))
+
       // Draw horizontal sub tickmarks, and don't draw the last set of subticks
       if (this.numSubTicks > 0 && x !== numXLines) {
         for (var i = 0; i < this.numSubTicks; i++) {

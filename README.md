@@ -18,7 +18,7 @@ View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) 
 
   * Play and pause buttons
 
-* Show time basis
+* ~~Show time axis~~
 
 * ~~Allow change of phase angle~~
 
