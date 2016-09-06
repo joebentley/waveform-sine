@@ -1,6 +1,6 @@
 body {
   margin: 5em auto;
-  max-width: 50em;
+  max-width: 60em;
 
   font-family: "Helvetica", "Arial", sans-serif;
   color: #333;
@@ -26,8 +26,12 @@ a:hover {
   margin-top: 2em;
 }
 
+#phase {
+  margin-right: 1em;
+}
+
 #amplitude {
-  margin-left: 3em;
+  margin-left: 1em;
 }
 
 #diagramContainer {

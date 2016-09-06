@@ -146,7 +146,7 @@ var lib = {}
     return scaled
   }
 
-  ns.drawSine = function (two, grid, amplitude, frequency) {
+  ns.drawSine = function (two, grid, amplitude, frequency, phase) {
     var numPoints = 1000
     var vertices = []
     var scaledVertices = []
@@ -157,7 +157,7 @@ var lib = {}
     for (var i = 0; i < numPoints; i++) {
       vertices[i] = {
         x: t,
-        y: amplitude * Math.sin(2 * Math.PI * frequency * t)
+        y: amplitude * Math.sin(2 * Math.PI * frequency * t + phase * Math.PI)
       }
 
       t += tSpacing
@@ -175,7 +175,7 @@ var lib = {}
     two.add(path)
   }
 
-  ns.runApp = function (canvasContainer, freqSlider, ampSlider, freqOutput, ampOutput) {
+  ns.runApp = function (canvasContainer, phaseSlider, freqSlider, ampSlider, phaseOutput, freqOutput, ampOutput) {
     var two = new Two({ width: 500, height: 500 }).appendTo(canvasContainer)
 
     var edgeOffset = 10
@@ -188,12 +188,24 @@ var lib = {}
 
     var amplitude = 5
     var frequency = 0.1
+    var phase = 0
 
     function redraw () {
       two.clear()
       grid.draw(two)
-      ns.drawSine(two, grid, amplitude, frequency)
+      ns.drawSine(two, grid, amplitude, frequency, phase)
       two.update()
+    }
+
+    if (phaseSlider !== undefined) {
+      $(phaseSlider).on('input', function () {
+        phase = Number(this.value)
+        redraw()
+
+        if (phaseOutput !== undefined) {
+          $(phaseOutput).text(phase.toFixed(1))
+        }
+      })
     }
 
     if (freqSlider !== undefined) {
