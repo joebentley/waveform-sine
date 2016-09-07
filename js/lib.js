@@ -1,4 +1,4 @@
-/* globals Two $ */
+/* globals Two $ JXG */
 
 var lib = {}
 
@@ -188,9 +188,9 @@ var lib = {}
     two.add(path)
   }
 
-  ns.runApp = function (canvasContainer, phaseSlider, freqSlider, ampSlider,
+  ns.runApp = function (canvasContainer, phasorContainer, phaseSlider, freqSlider, ampSlider,
                         phaseOutput, freqOutput, ampOutput, timeDelayOutput) {
-
+    // Start two.js and add grid instance
     var two = new Two({ width: 500, height: 500 }).appendTo(canvasContainer)
 
     var edgeOffset = 10
@@ -200,6 +200,32 @@ var lib = {}
     }, {
       numSubTicks: 4
     })
+
+    // Phasor plot
+    var board = JXG.JSXGraph.initBoard(phasorContainer.id, {
+      boundingbox: [-6, 6, 6, -6],
+      keepaspectratio: false,
+      showCopyright: false,
+      needsRegularUpdate: true
+    })
+
+    // Draw axes on board
+    board.create('axis', [[0, 0], [1, 0]])
+    board.create('axis', [[0, 0], [0, 1]])
+
+    // Draw initial phasors on board
+    var lineUnshifted = board.create('line', [[0, 0], [1, 0]],
+      {straightFirst: false, straightLast: false, lastArrow: true, strokeColor: 'red'})
+    lineUnshifted.isDraggable = false
+
+    var lineShifted = board.create('line', [[0, 0], [1, 0]],
+      {straightFirst: false, straightLast: false, lastArrow: true})
+    lineShifted.isDraggable = false
+
+    var angleArc = board.create('arc', [[0, 0], [1, 0], [0, 1]])
+    angleArc.center.setAttribute({visible: false})
+    angleArc.point2.setAttribute({visible: false})
+    angleArc.point3.setAttribute({visible: false})
 
     var amplitude = 5
     var frequency = 0.1
@@ -211,6 +237,15 @@ var lib = {}
       ns.drawSine(two, grid, amplitude, frequency, 0, 'red')
       ns.drawSine(two, grid, amplitude, frequency, phase, 'blue')
       two.update()
+
+      // Update phasor angles
+      lineUnshifted.point2.setPosition(JXG.COORDS_BY_USER, [amplitude, 0])
+      lineShifted.point2.setPosition(JXG.COORDS_BY_USER,
+        [amplitude * Math.cos(phase * Math.PI), amplitude * Math.sin(phase * Math.PI)])
+      angleArc.point3.setPosition(JXG.COORDS_BY_USER,
+        [Math.cos(phase * Math.PI), Math.sin(phase * Math.PI)])
+
+      board.fullUpdate()
     }
 
     if (phaseSlider !== undefined) {
