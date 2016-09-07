@@ -6,7 +6,8 @@ MathJax.Hub.Queue(function () {
   $('#hidden').css('visibility', '')
 
   // Get diagram container and run app
-  var elem = $('#diagramContainer')[0]
+  var diagramElem = $('#diagramContainer')[0]
+  var argandElem = $('#phasorContainer')[0]
   var phaseSlider = $('#phaseInput')
   var freqSlider = $('#frequencyInput')
   var ampSlider = $('#amplitudeInput')
@@ -19,5 +20,6 @@ MathJax.Hub.Queue(function () {
   $(freqOutput).text(Number($(freqSlider).val()).toFixed(1))
   $(ampOutput).text(Number($(ampSlider).val()).toFixed(1))
 
-  lib.runApp(elem, phaseSlider, freqSlider, ampSlider, phaseOutput, freqOutput, ampOutput, timeDelayOutput)
+  lib.runApp(diagramElem, argandElem, phaseSlider, freqSlider, ampSlider,
+    phaseOutput, freqOutput, ampOutput, timeDelayOutput)
 })
