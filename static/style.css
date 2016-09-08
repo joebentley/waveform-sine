@@ -42,19 +42,11 @@ a:hover {
   margin-right: 1em;
 }
 
-#diagramContainer {
-  position: relative;
-  right: 1em;
-}
-
-#phasorContainer {
-  position: relative;
-  left: 1em;
-}
-
 .diagramContainer {
-  width: 500px;
-  height: 500px;
+  text-align: center;
+  margin: 2em auto;
+  width: 400px;
+  height: 400px;
 }
 
 /* Tables */
