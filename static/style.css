@@ -31,7 +31,7 @@ a:hover {
 }
 
 #controls {
-  margin: 2em 0;
+  margin: 2em 0 1em;
 }
 
 #phase {
@@ -60,7 +60,7 @@ a:hover {
 /* Tables */
 .divTable {
 	display: table;
-  margin: 3em;
+  margin: 2em;
 }
 
 .divTableRow {
