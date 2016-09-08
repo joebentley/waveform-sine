@@ -210,8 +210,22 @@ var lib = {}
     })
 
     // Draw axes on board
-    board.create('axis', [[0, 0], [1, 0]])
-    board.create('axis', [[0, 0], [0, 1]])
+    board.create('axis', [[0, 0], [1, 0]], {
+      name: 'Re',
+      withLabel: true,
+      label: {
+        position: 'rt',
+        offset: [0, 10]
+      }
+    })
+    board.create('axis', [[0, 0], [0, 1]], {
+      name: 'Im',
+      withLabel: true,
+      label: {
+        position: 'rt',
+        offset: [20, 0]
+      }
+    })
 
     // Draw initial phasors on board
     var lineUnshifted = board.create('line', [[0, 0], [1, 0]],
