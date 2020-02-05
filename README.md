@@ -2,7 +2,7 @@
 
 This is an interactive visualisation of a sinusoidal waveform changing in time.
 
-View on [rawgit](https://rawgit.com/joebentley/waveform-sine/master/index.html) :sushi:
+[View on GitHub Pages](https://joebentley.github.io/waveform-sine/) :sushi:
 
 ## TODO
 
